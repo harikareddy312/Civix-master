@@ -31,7 +31,7 @@ export async function getPollById(pollId) {
 // Create a new poll (returns created poll)
 export async function createPoll(pollData) {
   try {
-    const res = await axios.post(`${API_URL}/polls`, pollData, DEFAULT_CONFIG);
+    const res = await api.post(`/polls`, pollData);
     return res.data.poll || res.data;
   } catch (err) {
     console.error("Error creating poll:", err);
@@ -57,7 +57,7 @@ export const votePoll = async (pollId, optionIndex) => {
 // Delete a poll (only creator)
 export async function deletePoll(pollId) {
   try {
-    const res = await axios.delete(`${API_URL}/polls/${pollId}`, DEFAULT_CONFIG);
+    const res = await api.delete(`/polls/${pollId}`);
     return res.data;
   } catch (err) {
     console.error("Error deleting poll:", err);
@@ -68,7 +68,7 @@ export async function deletePoll(pollId) {
 // Edit a poll (only creator)
 export async function editPoll(pollId, updatedData) {
   try {
-    const res = await axios.put(`${API_URL}/polls/${pollId}`, updatedData, DEFAULT_CONFIG);
+    const res = await api.put(`/polls/${pollId}`, updatedData);
     return res.data.poll || res.data;
   } catch (err) {
     console.error("Error editing poll:", err);
