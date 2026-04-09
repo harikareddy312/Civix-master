@@ -1,5 +1,5 @@
 import express from "express";
-import { auth } from "../middleware/auth.js";
+import { requireAuth } from "../middleware/auth.js";
 import {
   createPoll,
   getPolls,
@@ -22,15 +22,15 @@ router.get("/", getPolls);
 router.get("/:id", getPollById);
 
 // Create a poll (authenticated)
-router.post("/", auth, createPoll);
+router.post("/", requireAuth, createPoll);
 
 // Vote on a poll (authenticated)
-router.post("/:id/vote", auth, votePoll);
+router.post("/:id/vote", requireAuth, votePoll);
 
 // Delete a poll (only creator, authenticated)
-router.delete("/:id", auth, deletePoll);
+router.delete("/:id", requireAuth, deletePoll);
 
 // Edit a poll (only creator, authenticated)
-router.put("/:pollId", auth, editPoll);
+router.put("/:pollId", requireAuth, editPoll);
 
 export default router;
